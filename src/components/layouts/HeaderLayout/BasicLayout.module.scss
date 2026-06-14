@@ -1,0 +1,19 @@
+@use "@/styles/common" as *;
+
+.wrapper {
+  position: relative;
+}
+
+.header {
+  position: fixed;
+  top: 0;
+  left: 0;
+}
+
+.content {
+  width: 100%;
+  max-width: $pcContentInnerMaxWidth + $pcVerticalPadding * 2;
+  padding: ($headerHeight + $pcVerticalPadding) $pcHorizontalPadding
+    $pcVerticalPadding;
+  margin: 0 auto;
+}

@@ -1,0 +1,17 @@
+@use "@/styles/common";
+
+$headerBgColor: #18181b;
+
+.wrapper {
+  width: 100%;
+  border-bottom: 1px solid common.$borderColor;
+  height: common.$headerHeight;
+  display: flex;
+  justify-content: center;
+  background-color: $headerBgColor;
+}
+
+.container {
+  width: 100%;
+  max-width: common.$pcContentInnerMaxWidth + common.$pcHorizontalPadding * 2;
+}

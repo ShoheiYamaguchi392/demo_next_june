@@ -1,5 +1,8 @@
 $mobileMaxWidth: 599px;
+$mobileHorizontalPadding: 16px;
+
 $pcHorizontalPadding: 20px;
+$pcVerticalPadding: 40px;
 $pcContentInnerMaxWidth: 1000px;
 
 @mixin mobileView {
@@ -7,3 +10,9 @@ $pcContentInnerMaxWidth: 1000px;
     @content;
   }
 }
+
+$headerHeight: 40px;
+
+$borderColor: #aaa;
+
+$backgroundColor: #fff;
