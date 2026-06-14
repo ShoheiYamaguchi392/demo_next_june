@@ -1,3 +1,5 @@
+import Top from "@/components/pages/top/Top";
+
 export default function Home() {
-  return <div>page content</div>;
+  return <Top />;
 }
