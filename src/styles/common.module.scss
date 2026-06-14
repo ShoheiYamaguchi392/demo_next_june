@@ -1,0 +1,9 @@
+$mobileMaxWidth: 599px;
+$pcHorizontalPadding: 20px;
+$pcContentInnerMaxWidth: 1000px;
+
+@mixin mobileView {
+  @media screen and (max-width: $mobileMaxWidth) {
+    @content;
+  }
+}

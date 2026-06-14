@@ -1,4 +1,4 @@
-import Top from "@/components/pages/top/Top";
+import Top from "@/components/pages/Top/Top";
 
 export default function Home() {
   return <Top />;
