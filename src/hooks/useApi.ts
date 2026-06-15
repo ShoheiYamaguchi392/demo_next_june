@@ -11,12 +11,7 @@ const axiosInstance = axios.create({
   },
 });
 
-console.log({
-  "Client-ID": String(process.env.TWITCH_CLIENT_ID),
-  Authorization: `Bearer ${process.env.TWITCH_TOKEN}`,
-});
-
-export const useApi = (onSuccess?) => {
+export const useApi = ({ onSuccess }) => {
   const [isSuccess, setIsSuccess] = useState(false);
   const [isError, setIsError] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
