@@ -12,6 +12,12 @@ $headerBgColor: #18181b;
 }
 
 .container {
+  display: flex;
   width: 100%;
   max-width: common.$pcContentInnerMaxWidth + common.$pcHorizontalPadding * 2;
+  align-items: center;
+}
+
+.siteTitle {
+  margin-right: auto;
 }
