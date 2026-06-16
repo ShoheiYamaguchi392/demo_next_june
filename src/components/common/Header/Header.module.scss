@@ -1,23 +1,64 @@
-@use "@/styles/common";
+@use "@/styles/common" as *;
 
 $headerBgColor: #18181b;
 
 .wrapper {
   display: flex;
   justify-content: center;
-  border-bottom: 1px solid common.$borderColor;
+  border-bottom: 1px solid $borderColor;
   background-color: $headerBgColor;
   width: 100%;
-  height: common.$headerHeight;
+  height: $headerHeight;
 }
 
 .container {
   display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
   align-items: center;
+  padding: 0 $pcHorizontalPadding;
   width: 100%;
-  max-width: common.$pcContentInnerMaxWidth + common.$pcHorizontalPadding * 2;
+  max-width: $pcContentInnerMaxWidth + $pcHorizontalPadding * 2;
+
+  @include mobileView {
+    padding: 0 $mobileHorizontalPadding;
+  }
 }
 
 .siteTitle {
   margin-right: auto;
+  font-weight: bold;
+  font-size: 18px;
+}
+
+.searchWrapper {
+  display: flex;
+  align-items: center;
+  margin-left: auto; // SPで折り返した時、右に寄せる
+}
+
+.input {
+  border-radius: 4px;
+  background-color: #333;
+
+  :global(.MuiInputBase-input) {
+    padding-top: 4px;
+    padding-bottom: 4px;
+    color: #fff;
+  }
+}
+
+.switchWrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.switchButton {
+  margin-top: -10px;
+
+  :global(.MuiButtonBase-root):not(:global(.Mui-checked))
+    + :global(.MuiSwitch-track) {
+    background-color: #fff;
+  }
 }

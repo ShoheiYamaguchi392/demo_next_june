@@ -19,9 +19,9 @@
   padding: ($headerHeight + $pcVerticalPadding) $pcHorizontalPadding
     $pcVerticalPadding;
   width: 100%;
-  max-width: $pcContentInnerMaxWidth + $pcVerticalPadding * 2;
+  max-width: $pcContentInnerMaxWidth + $pcHorizontalPadding * 2;
 
   @include mobileView {
-    padding: $pcVerticalPadding $pcHorizontalPadding;
+    padding: $pcVerticalPadding $mobileHorizontalPadding;
   }
 }

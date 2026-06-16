@@ -28,9 +28,23 @@ const Header = ({ className }) => {
     <header className={clsx(styles.wrapper, className)}>
       <div className={styles.container}>
         <div className={styles.siteTitle}>Twitch Channels</div>
-        <TextField value={channelName} onChange={handleChannelNameChange} />
-        <Switch checked={isLive} onChange={handleChangeIsLive} />
-        <Button onClick={searchChannel}>Search</Button>
+        <div className={styles.searchWrapper}>
+          <div className={styles.switchWrapper}>
+            <div>LIVE</div>
+            <Switch
+              className={styles.switchButton}
+              checked={isLive}
+              onChange={handleChangeIsLive}
+            />
+          </div>
+          <TextField
+            className={styles.input}
+            value={channelName}
+            onChange={handleChannelNameChange}
+            placeholder="チャンネル名を入力"
+          />
+          <Button onClick={searchChannel}>Search</Button>
+        </div>
       </div>
     </header>
   );
