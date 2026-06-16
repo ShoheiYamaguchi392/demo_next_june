@@ -11,9 +11,9 @@
 }
 
 .content {
-  width: 100%;
-  max-width: $pcContentInnerMaxWidth + $pcVerticalPadding * 2;
+  margin: 0 auto;
   padding: ($headerHeight + $pcVerticalPadding) $pcHorizontalPadding
     $pcVerticalPadding;
-  margin: 0 auto;
+  width: 100%;
+  max-width: $pcContentInnerMaxWidth + $pcVerticalPadding * 2;
 }

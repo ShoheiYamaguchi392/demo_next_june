@@ -11,10 +11,10 @@
 
 .wrapper {
   display: flex;
-  padding: 8px;
   column-gap: 8px;
-  background-color: $cardBackgroundColor;
   transition: background-color 0.2s ease-in-out;
+  background-color: $cardBackgroundColor;
+  padding: 8px;
 
   @media (hover: hover) {
     &:hover {
@@ -26,7 +26,7 @@
 .image {
   flex-shrink: 0;
   vertical-align: bottom;
+  aspect-ratio: 1/1;
   width: 200px;
   object-fit: contain;
-  aspect-ratio: 1/1;
 }
