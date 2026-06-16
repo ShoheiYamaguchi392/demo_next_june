@@ -29,10 +29,20 @@ const useTop = () => {
   const [channelList, setChannelList] = useState<channelList>([]);
   const [paginationCursor, setPaginationCursor] = useState(undefined);
 
+  const apiCommonQuery = {
+    first: MaxFetchLength,
+    query: channelName,
+    live_only: isLive,
+  };
+
   /**
    * 初回取得
    */
-  const { api: initialFetchApi, isLoading: isFetchLoading } = useApi({
+  const {
+    api: initialFetchApi,
+    isSuccess: isInitialFetchSccess,
+    isLoading: isFetchLoading,
+  } = useApi({
     onSuccess: (data) => {
       setChannelList(formatChannelData(data.data));
       setPaginationCursor(data?.pagination?.cursor); // 次の取得開始位置を示す
@@ -43,11 +53,7 @@ const useTop = () => {
    * 初回取得
    */
   const fetchChannels = async () => {
-    initialFetchApi.get("search/channels", {
-      first: MaxFetchLength,
-      query: channelName,
-      live_only: isLive,
-    });
+    initialFetchApi.get("search/channels", apiCommonQuery);
   };
 
   /**
@@ -75,8 +81,8 @@ const useTop = () => {
       return;
     }
     nextFetchApi.get("search/channels", {
-      first: MaxFetchLength,
       after: paginationCursor,
+      ...apiCommonQuery,
     });
   };
 
@@ -94,6 +100,7 @@ const useTop = () => {
     isChannelNameRequired,
     channelList,
     hasMore: !!paginationCursor,
+    isInitialFetchSccess,
     loading: {
       isFetchLoading,
       isNextFetchLoading,
