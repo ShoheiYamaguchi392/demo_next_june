@@ -8,6 +8,10 @@
   position: fixed;
   top: 0;
   left: 0;
+
+  @include mobileView {
+    position: relative;
+  }
 }
 
 .content {
@@ -16,4 +20,8 @@
     $pcVerticalPadding;
   width: 100%;
   max-width: $pcContentInnerMaxWidth + $pcVerticalPadding * 2;
+
+  @include mobileView {
+    padding: $pcVerticalPadding $pcHorizontalPadding;
+  }
 }
