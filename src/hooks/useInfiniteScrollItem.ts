@@ -1,7 +1,6 @@
 import { useState, useEffect, useRef } from "react";
 
 const OFF_SCREEN_MARGIN = 500;
-console.log(`${OFF_SCREEN_MARGIN}px 0 ${OFF_SCREEN_MARGIN}px 0`);
 
 /**
  * 画面外に消えた要素を、高さをそのままに削除するためのフック
