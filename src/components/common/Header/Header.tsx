@@ -25,6 +25,12 @@ const Header = ({ className }) => {
     changeIsLive(!isLive);
   };
 
+  const handleInputKeydown = (e) => {
+    if (!e.nativeEvent.isComposing && e.key === "Enter") {
+      searchChannel();
+    }
+  };
+
   return (
     <header className={clsx(styles.wrapper, className)}>
       <div className={styles.container}>
@@ -43,6 +49,7 @@ const Header = ({ className }) => {
             value={channelName}
             onChange={handleChannelNameChange}
             placeholder="チャンネル名を入力"
+            onKeyDown={handleInputKeydown}
           />
           <Button className={styles.searchButton} onClick={searchChannel}>
             <Search />
