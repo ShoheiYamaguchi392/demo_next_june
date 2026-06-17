@@ -44,7 +44,7 @@ const useTop = () => {
    */
   const {
     api: initialFetchApi,
-    isSuccess: isInitialFetchSccess,
+    isSuccess: isInitialFetchSuccess,
     isLoading: isFetchLoading,
   } = useApi({
     onSuccess: (data) => {
@@ -104,7 +104,7 @@ const useTop = () => {
     isChannelNameRequired,
     channelList,
     hasMore: !!paginationCursor,
-    isInitialFetchSccess,
+    isInitialFetchSuccess,
     loading: {
       isFetchLoading,
       isNextFetchLoading,

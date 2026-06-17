@@ -2,6 +2,7 @@
 
 import BasicLayout from "@/components/layouts/HeaderLayout/BasicLayout";
 import { CircularProgress, Button } from "@mui/material";
+import ArrowUpwardIcon from "@mui/icons-material/ArrowUpward";
 
 import useTop from "./useTop";
 import styles from "./Top.module.scss";
@@ -13,7 +14,7 @@ const Top = () => {
     channelList,
     hasMore,
     loading,
-    isInitialFetchSccess,
+    isInitialFetchSuccess,
     fetchChannels,
     fetchNextChannels,
     bottomElementRef,
@@ -25,7 +26,8 @@ const Top = () => {
     !loading.isFetchLoading &&
     !loading.isNextFetchLoading;
 
-  const isNoContentDisplayed = isInitialFetchSccess && channelList.length === 0;
+  const isNoContentDisplayed =
+    isInitialFetchSuccess && channelList.length === 0;
 
   const listContent = (
     <>
@@ -42,20 +44,31 @@ const Top = () => {
         </ol>
       )}
       {(loading.isFetchLoading || loading.isNextFetchLoading) && (
-        <div className={styles["loading-wrapper"]}>
+        <div className={styles.loadingWrapper}>
           <CircularProgress />
         </div>
       )}
       {isFetchNextButtonDisplayed && (
         <Button onClick={fetchNextChannels}>load more</Button>
       )}
-      {isNoContentDisplayed && <p>no content</p>}
+      {isNoContentDisplayed && (
+        <p className={styles.noContentMessage}>
+          チャンネルが見つかりませんでした
+        </p>
+      )}
     </>
   );
 
   return (
     <BasicLayout fetchChannels={fetchChannels}>
-      {isChannelNameRequired ? <div>チャンネルを検索</div> : listContent}
+      {isChannelNameRequired ? (
+        <div className={styles.searchChannelsWrapper}>
+          チャンネルを検索！
+          <ArrowUpwardIcon />
+        </div>
+      ) : (
+        listContent
+      )}
     </BasicLayout>
   );
 };
