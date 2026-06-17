@@ -8,14 +8,14 @@ import { Search } from "@mui/icons-material";
 import useHeader from "./useHeader";
 import styles from "./Header.module.scss";
 
-const Header = ({ className }) => {
+const Header = ({ className, fetchChannels }) => {
   const {
     channelName,
     isLive,
     changeChannelName,
     changeIsLive,
     searchChannel,
-  } = useHeader();
+  } = useHeader({ fetchChannels });
 
   const handleChannelNameChange = (e) => {
     changeChannelName(e.target.value);

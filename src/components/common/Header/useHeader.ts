@@ -5,7 +5,7 @@ import useGetChannelSearchParams from "@/hooks/useGetChannelSearchParams";
 
 import { getTopPageUri } from "@/utils/getRelativeURI";
 
-const useHeader = () => {
+const useHeader = ({ fetchChannels }) => {
   const { channelName: initialChannelName, isLive: initialIsLive } =
     useGetChannelSearchParams();
 
@@ -18,14 +18,14 @@ const useHeader = () => {
     const newRelative = "/" + getTopPageUri(channelName, isLive);
     const currentRelativePath =
       window.location.pathname + window.location.search;
-    if (newRelative !== currentRelativePath) {
+
+    if (newRelative == currentRelativePath && fetchChannels) {
+      // 相対URLがそのままの場合は、再フェッチ
+      fetchChannels();
+    } else {
+      // 相対URLが異なる（TOPページの場合、クエリパラメータが更新される）場合
       router.push(getTopPageUri(channelName, isLive));
     }
-    /*  
-      TODO:
-        同じ相対URLだった場合は、ページ遷移をせずにリスト一覧を再取得する形に変更する
-        Headerの検索バー部分を、リストの一覧に移動しても良い
-    */
   };
 
   return {

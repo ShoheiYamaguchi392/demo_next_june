@@ -109,6 +109,7 @@ const useTop = () => {
       isFetchLoading,
       isNextFetchLoading,
     },
+    fetchChannels,
     fetchNextChannels,
     bottomElementRef,
   };

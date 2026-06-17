@@ -14,6 +14,7 @@ const Top = () => {
     hasMore,
     loading,
     isInitialFetchSccess,
+    fetchChannels,
     fetchNextChannels,
     bottomElementRef,
   } = useTop();
@@ -53,7 +54,7 @@ const Top = () => {
   );
 
   return (
-    <BasicLayout>
+    <BasicLayout fetchChannels={fetchChannels}>
       {isChannelNameRequired ? <div>チャンネルを検索</div> : listContent}
     </BasicLayout>
   );
