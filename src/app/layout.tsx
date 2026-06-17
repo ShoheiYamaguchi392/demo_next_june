@@ -3,6 +3,7 @@ import { Suspense } from "react";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import Loading from "@/components/layouts/Loading/Loading";
+import { StyledEngineProvider } from "@mui/material/styles";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -30,7 +31,9 @@ export default function RootLayout({
       className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col">
-        <Suspense fallback={<Loading />}>{children}</Suspense>
+        <StyledEngineProvider injectFirst>
+          <Suspense fallback={<Loading />}>{children}</Suspense>
+        </StyledEngineProvider>
       </body>
     </html>
   );

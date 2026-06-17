@@ -3,6 +3,7 @@
 import clsx from "clsx";
 
 import { Button, Switch, TextField } from "@mui/material";
+import { Search } from "@mui/icons-material";
 
 import useHeader from "./useHeader";
 import styles from "./Header.module.scss";
@@ -43,7 +44,9 @@ const Header = ({ className }) => {
             onChange={handleChannelNameChange}
             placeholder="チャンネル名を入力"
           />
-          <Button onClick={searchChannel}>Search</Button>
+          <Button className={styles.searchButton} onClick={searchChannel}>
+            <Search />
+          </Button>
         </div>
       </div>
     </header>
