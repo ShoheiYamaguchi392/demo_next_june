@@ -1,0 +1,32 @@
+@use "@/styles/common" as *;
+
+.container {
+  border: 1px solid $borderColor;
+  border-radius: 4px;
+
+  & + & {
+    margin-top: 20px;
+  }
+}
+
+.wrapper {
+  display: flex;
+  column-gap: 8px;
+  transition: background-color 0.2s ease-in-out;
+  background-color: $cardBackgroundColor;
+  padding: 8px;
+
+  @media (hover: hover) {
+    &:hover {
+      background-color: $hoverCardBackgroundColor;
+    }
+  }
+}
+
+.image {
+  flex-shrink: 0;
+  vertical-align: bottom;
+  aspect-ratio: 1/1;
+  width: 200px;
+  object-fit: contain;
+}

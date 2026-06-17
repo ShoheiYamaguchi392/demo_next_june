@@ -1,0 +1,19 @@
+$mobileMaxWidth: 599px;
+$mobileHorizontalPadding: 16px;
+
+$pcHorizontalPadding: 20px;
+$pcVerticalPadding: 40px;
+$pcContentInnerMaxWidth: 1000px;
+
+@mixin mobileView {
+  @media screen and (max-width: $mobileMaxWidth) {
+    @content;
+  }
+}
+
+$headerHeight: 80px;
+
+$borderColor: #aaa;
+
+$cardBackgroundColor: #333;
+$hoverCardBackgroundColor: #444;

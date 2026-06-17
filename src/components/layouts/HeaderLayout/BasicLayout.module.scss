@@ -1,0 +1,27 @@
+@use "@/styles/common" as *;
+
+.wrapper {
+  position: relative;
+}
+
+.header {
+  position: fixed;
+  top: 0;
+  left: 0;
+
+  @include mobileView {
+    position: relative;
+  }
+}
+
+.content {
+  margin: 0 auto;
+  padding: ($headerHeight + $pcVerticalPadding) $pcHorizontalPadding
+    $pcVerticalPadding;
+  width: 100%;
+  max-width: $pcContentInnerMaxWidth + $pcHorizontalPadding * 2;
+
+  @include mobileView {
+    padding: $pcVerticalPadding $mobileHorizontalPadding;
+  }
+}
