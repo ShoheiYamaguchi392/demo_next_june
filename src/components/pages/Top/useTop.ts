@@ -8,7 +8,7 @@ type channelList = {
   id: string;
   displayName: string;
   thumbnailUrl: string;
-  channelPathName: string;
+  channelIdName: string;
 }[];
 
 const MaxFetchLength = 20;
@@ -20,7 +20,7 @@ const formatChannelData = (channelList) => {
         id,
         displayName: display_name,
         thumbnailUrl: thumbnail_url,
-        channelPathName: broadcaster_login,
+        channelIdName: broadcaster_login,
       };
     },
   );
