@@ -49,7 +49,9 @@ const Top = () => {
         </div>
       )}
       {isFetchNextButtonDisplayed && (
-        <Button onClick={fetchNextChannels}>load more</Button>
+        <Button className={styles.loadMoreButton} onClick={fetchNextChannels}>
+          load more
+        </Button>
       )}
       {isNoContentDisplayed && (
         <p className={styles.noContentMessage}>
