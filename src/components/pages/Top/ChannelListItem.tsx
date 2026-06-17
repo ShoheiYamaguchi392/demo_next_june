@@ -4,10 +4,10 @@ import { getTwitchChannelPage } from "@/utils/getTwitchUrl";
 import { useInfiniteScrollItem } from "@/hooks/useInfiniteScrollItem";
 
 const ChannelListItem = ({ ref, channel }) => {
-  const { displayName, thumbnailUrl } = channel;
+  const { displayName, thumbnailUrl, channelPathName } = channel;
 
   const { itemRef, itemMinHeight, isItemOffScreen } = useInfiniteScrollItem();
-  const channelPageUrl = getTwitchChannelPage(displayName);
+  const channelPageUrl = getTwitchChannelPage(channelPathName);
 
   return (
     <div ref={ref} className={styles.container}>

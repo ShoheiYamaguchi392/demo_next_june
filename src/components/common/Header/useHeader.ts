@@ -3,7 +3,7 @@ import { useRouter } from "next/navigation";
 
 import useGetChannelSearchParams from "@/hooks/useGetChannelSearchParams";
 
-import { getTopPageURI } from "@/utils/getRelativeURI";
+import { getTopPageUri } from "@/utils/getRelativeURI";
 
 const useHeader = () => {
   const { channelName: initialChannelName, isLive: initialIsLive } =
@@ -15,7 +15,17 @@ const useHeader = () => {
   const router = useRouter();
 
   const searchChannel = () => {
-    router.push(getTopPageURI(channelName, isLive));
+    const newRelative = "/" + getTopPageUri(channelName, isLive);
+    const currentRelativePath =
+      window.location.pathname + window.location.search;
+    if (newRelative !== currentRelativePath) {
+      router.push(getTopPageUri(channelName, isLive));
+    }
+    /*  
+      TODO:
+        同じ相対URLだった場合は、ページ遷移をせずにリスト一覧を再取得する形に変更する
+        Headerの検索バー部分を、リストの一覧に移動しても良い
+    */
   };
 
   return {
