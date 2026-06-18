@@ -26,6 +26,7 @@ const useChannelDetail = () => {
     api: fetchChannelInfoApi,
     isLoading,
     isError,
+    abortFetch,
   } = useApi({
     onSuccess: (data) => {
       setChannelInfo(formatChannelInfoDeta(data.data));
@@ -40,6 +41,10 @@ const useChannelDetail = () => {
 
   useEffect(() => {
     fetchChannelInfo();
+
+    return () => {
+      abortFetch();
+    };
   }, [channelId]);
 
   return {
