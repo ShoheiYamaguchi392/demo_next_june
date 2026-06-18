@@ -8,5 +8,5 @@ export const getTopPageUri = (channelName, isLive) => {
       ? channelSearchConstants.IS_LIVE_VALUE
       : "",
   });
-  return `?${stringSearchParams}`;
+  return `/?${stringSearchParams}`;
 };
