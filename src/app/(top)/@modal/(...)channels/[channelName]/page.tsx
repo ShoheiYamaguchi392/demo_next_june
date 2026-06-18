@@ -1,14 +1,15 @@
-import { Modal } from "@mui/material";
+"use client";
+
+import Modal from "@/components/common/Modal/Modal";
+import { useRouter } from "next/navigation";
 
 const ChannelDetail = () => {
-  return (
-    <>
-      <Modal open>
-        <div>modal</div>
-      </Modal>
-    </>
-  );
-  return <p>channelDetail intercept default</p>;
+  const router = useRouter();
+  const handleClose = () => {
+    router.back();
+  };
+
+  return <Modal onClose={handleClose}>modal detail</Modal>;
 };
 
 export default ChannelDetail;
