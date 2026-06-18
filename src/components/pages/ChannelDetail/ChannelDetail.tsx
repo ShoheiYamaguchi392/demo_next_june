@@ -11,8 +11,6 @@ const ChannelDetail = () => {
   const { channelInfo, isLoading, isError } = useChannelDetail();
   const channelPageUrl = getTwitchChannelPage(channelInfo.loginName);
 
-  console.log({ isLoading, isError });
-
   return isLoading ? (
     <div className={styles.loadingWrapper}>
       <CircularProgress />
