@@ -1,37 +1,41 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 
 import { useApi } from "@/hooks/useApi";
 import { useInfiniteScroll } from "@/hooks/useInfiniteScroll";
 import useGetChannelSearchParams from "@/hooks/useGetChannelSearchParams";
+import { usePathname } from "next/navigation";
 
 type channelList = {
   id: string;
   displayName: string;
   thumbnailUrl: string;
-  channelPathName: string;
 }[];
 
 const MaxFetchLength = 20;
 
 const formatChannelData = (channelList) => {
-  return channelList.map(
-    ({ id, display_name, thumbnail_url, broadcaster_login }) => {
-      return {
-        id,
-        displayName: display_name,
-        thumbnailUrl: thumbnail_url,
-        channelPathName: broadcaster_login,
-      };
-    },
-  );
+  return channelList.map(({ id, display_name, thumbnail_url }) => {
+    return {
+      id,
+      displayName: display_name,
+      thumbnailUrl: thumbnail_url,
+    };
+  });
 };
 
 const useTop = () => {
   const { channelName, isLive } = useGetChannelSearchParams();
-  const isChannelNameRequired = !channelName;
-
   const [channelList, setChannelList] = useState<channelList>([]);
   const [paginationCursor, setPaginationCursor] = useState(undefined);
+  const searchConditionRef = useRef({
+    channelName: "",
+    isLive: false,
+  });
+  const pathname = usePathname();
+
+  const isTopPage = pathname === "/";
+  // チャンネル詳細モーダル（パスが変わるがモーダルが表示されるのみ）に遷移した場合は、channelNameを求めない
+  const isChannelNameRequired = !channelName && isTopPage;
 
   const apiCommonQuery = {
     first: MaxFetchLength,
@@ -91,7 +95,18 @@ const useTop = () => {
   };
 
   useEffect(() => {
-    if (isChannelNameRequired) return;
+    // チャンネル詳細モーダル（パスが変わるがモーダルが表示されるのみ）に遷移した場合は、fetchChannelsしない
+    if (
+      !isTopPage ||
+      (searchConditionRef.current.channelName === channelName &&
+        searchConditionRef.current.isLive === isLive) ||
+      isChannelNameRequired
+    )
+      return;
+    searchConditionRef.current = {
+      channelName: channelName,
+      isLive: isLive,
+    };
     fetchChannels();
   }, [channelName, isLive]);
 
