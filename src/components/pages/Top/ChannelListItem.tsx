@@ -16,7 +16,7 @@ const ChannelListItem = ({ ref, channel }) => {
         style={{ minHeight: isItemOffScreen ? itemMinHeight : 0 }}
       >
         <Link
-          href={`/${channelIdName}`}
+          href={`/channels/${channelIdName}`}
           className={styles.wrapper}
           style={{ minHeight: isItemOffScreen ? itemMinHeight : 0 }}
         >
