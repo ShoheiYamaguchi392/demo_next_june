@@ -13,6 +13,7 @@
   border-radius: 4px;
   background-color: $cardBackgroundColor;
   padding: 20px;
-  width: calc(100% - ($mobileHorizontalPadding * 2));
-  max-width: 400px;
+  width: 400px;
+  max-width: calc(100% - ($mobileHorizontalPadding * 2));
+  min-height: 200px;
 }

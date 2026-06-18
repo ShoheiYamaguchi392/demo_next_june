@@ -5,7 +5,7 @@ import Link from "next/link";
 import { useInfiniteScrollItem } from "@/hooks/useInfiniteScrollItem";
 
 const ChannelListItem = ({ ref, channel }) => {
-  const { displayName, thumbnailUrl, channelIdName } = channel;
+  const { displayName, thumbnailUrl, id: channelId } = channel;
 
   const { itemRef, itemMinHeight, isItemOffScreen } = useInfiniteScrollItem();
 
@@ -16,7 +16,7 @@ const ChannelListItem = ({ ref, channel }) => {
         style={{ minHeight: isItemOffScreen ? itemMinHeight : 0 }}
       >
         <Link
-          href={`/channels/${channelIdName}`}
+          href={`/channels/${channelId}`}
           className={styles.wrapper}
           style={{ minHeight: isItemOffScreen ? itemMinHeight : 0 }}
         >

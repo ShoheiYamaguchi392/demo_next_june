@@ -1,0 +1,13 @@
+.link {
+  display: block;
+  color: lightblue;
+  text-align: right;
+  &:hover {
+    color: yellow;
+  }
+}
+
+.loadingWrapper {
+  display: flex;
+  justify-content: center;
+}

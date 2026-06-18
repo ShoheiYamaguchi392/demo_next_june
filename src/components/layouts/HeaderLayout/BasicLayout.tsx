@@ -11,4 +11,11 @@ const BasicLayout = ({ children, fetchChannels }) => {
   );
 };
 
+const defaultProps = {
+  children: null,
+  fetchChannels: () => {},
+};
+
+BasicLayout.defaultProps = defaultProps;
+
 export default BasicLayout;

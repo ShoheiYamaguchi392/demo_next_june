@@ -9,22 +9,18 @@ type channelList = {
   id: string;
   displayName: string;
   thumbnailUrl: string;
-  channelIdName: string;
 }[];
 
 const MaxFetchLength = 20;
 
 const formatChannelData = (channelList) => {
-  return channelList.map(
-    ({ id, display_name, thumbnail_url, broadcaster_login }) => {
-      return {
-        id,
-        displayName: display_name,
-        thumbnailUrl: thumbnail_url,
-        channelIdName: broadcaster_login,
-      };
-    },
-  );
+  return channelList.map(({ id, display_name, thumbnail_url }) => {
+    return {
+      id,
+      displayName: display_name,
+      thumbnailUrl: thumbnail_url,
+    };
+  });
 };
 
 const useTop = () => {
