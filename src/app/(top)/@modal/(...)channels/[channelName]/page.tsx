@@ -4,7 +4,7 @@ const ChannelDetail = () => {
   return (
     <>
       <Modal open>
-        <p>modal</p>
+        <div>modal</div>
       </Modal>
     </>
   );
