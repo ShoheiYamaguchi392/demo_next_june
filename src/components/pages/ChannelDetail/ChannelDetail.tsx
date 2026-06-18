@@ -8,14 +8,18 @@ import { getTwitchChannelPage } from "@/utils/getTwitchUrl";
 import styles from "./ChannelDetail.module.scss";
 
 const ChannelDetail = () => {
-  const { channelInfo, isLoading } = useChannelDetail();
+  const { channelInfo, isLoading, isError } = useChannelDetail();
   const channelPageUrl = getTwitchChannelPage(channelInfo.loginName);
+
+  console.log({ isLoading, isError });
 
   return isLoading ? (
     <div className={styles.loadingWrapper}>
       <CircularProgress />
     </div>
-  ) : (
+  ) : isError ? (
+    <p>チャンネル情報を取得できませんでした</p>
+  ) : !channelInfo.channelName ? null : (
     <>
       <h1>{channelInfo.channelName}</h1>
       <Link
