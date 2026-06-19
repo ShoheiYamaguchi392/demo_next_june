@@ -1,0 +1,30 @@
+.listItem {
+  & + & {
+    margin-top: 20px;
+  }
+}
+
+.noContentMessage {
+  display: flex;
+  justify-content: center;
+}
+
+.loadingWrapper {
+  display: flex;
+  justify-content: center;
+}
+
+.searchChannelsWrapper {
+  display: flex;
+  column-gap: 10px;
+  justify-content: flex-end;
+  align-items: center;
+  padding-right: 10px;
+  height: 24px;
+}
+
+.loadMoreButton {
+  display: block;
+  margin: 0 auto;
+  border: 1px solid;
+}

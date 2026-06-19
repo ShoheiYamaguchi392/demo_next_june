@@ -1,10 +1,18 @@
 import { defineConfig, globalIgnores } from "eslint/config";
 import nextVitals from "eslint-config-next/core-web-vitals";
 import nextTs from "eslint-config-next/typescript";
+import eslintConfigPrettier from "eslint-config-prettier/flat";
 
 const eslintConfig = defineConfig([
   ...nextVitals,
   ...nextTs,
+  eslintConfigPrettier,
+  {
+    rules: {
+      "no-unused-vars": "error",
+      "@typescript-eslint/no-unused-vars": "off", // ts導入前のファイルで動作させるため
+    },
+  },
   // Override default ignores of eslint-config-next.
   globalIgnores([
     // Default ignores of eslint-config-next:

@@ -1,0 +1,19 @@
+@use "@/styles/common" as *;
+
+.wrapper {
+  transition: 0;
+}
+
+.box {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  border: 1px solid $borderColor;
+  border-radius: 4px;
+  background-color: $cardBackgroundColor;
+  padding: 20px;
+  width: 400px;
+  max-width: calc(100% - ($mobileHorizontalPadding * 2));
+  min-height: 200px;
+}
