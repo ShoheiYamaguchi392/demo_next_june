@@ -1,5 +1,5 @@
 import axios from "axios";
-import { useCallback, useState, useMemo } from "react";
+import { useCallback, useState, useMemo, useRef } from "react";
 
 const axiosInstance = axios.create({
   baseURL: "https://api.twitch.tv/helix/",
@@ -15,10 +15,16 @@ export const useApi = ({ onSuccess }) => {
   const [isSuccess, setIsSuccess] = useState(false);
   const [isError, setIsError] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
+  const abortControllerRef = useRef<AbortController | null>(null);
+
+  if (abortControllerRef.current === null) {
+    abortControllerRef.current = new AbortController();
+  }
 
   const reset = useCallback(() => {
     setIsSuccess(false);
     setIsError(false);
+    abortControllerRef.current = new AbortController();
   }, []);
 
   const callApi = useCallback(
@@ -26,32 +32,41 @@ export const useApi = ({ onSuccess }) => {
       setIsLoading(true);
       reset();
 
+      const defaultConfig = {
+        signal: abortControllerRef.current?.signal,
+      };
+
       try {
-        const response = await callback();
+        const response = await callback(defaultConfig);
 
         setIsSuccess(true);
         if (onSuccess) onSuccess(response.data);
-      } catch {
-        setIsError(true);
+      } catch (error) {
+        // abortControllerでキャンセルされた場合はリセットする
+        if (error.code === "ERR_CANCELED") {
+          reset();
+        } else {
+          setIsError(true);
+        }
       } finally {
         setIsLoading(false);
+        abortControllerRef.current = new AbortController();
       }
     },
     [onSuccess, reset],
   );
 
-  const defaultConfig = useMemo(() => {
-    const abortController = new AbortController();
-    return {
-      signal: abortController.signal,
-    };
-  }, []);
+  const abortFetch = () => {
+    if (abortControllerRef.current) {
+      abortControllerRef.current.abort();
+    }
+  };
 
   const api = useMemo(() => {
     return {
       get: (path, params?, config = {}) =>
         callApi(
-          async () =>
+          async (defaultConfig) =>
             await axiosInstance.get(path, {
               params,
               ...defaultConfig,
@@ -60,7 +75,7 @@ export const useApi = ({ onSuccess }) => {
         ),
       post: (path, data?, config = {}) =>
         callApi(
-          async () =>
+          async (defaultConfig) =>
             await axiosInstance.get(path, {
               data,
               ...defaultConfig,
@@ -68,12 +83,13 @@ export const useApi = ({ onSuccess }) => {
             }),
         ),
     };
-  }, [callApi, defaultConfig]);
+  }, [callApi]);
 
   return {
     api,
     isSuccess,
     isError,
     isLoading,
+    abortFetch,
   };
 };

@@ -50,6 +50,7 @@ const useTop = () => {
     api: initialFetchApi,
     isSuccess: isInitialFetchSuccess,
     isLoading: isFetchLoading,
+    abortFetch: abortInitialFetch,
   } = useApi({
     onSuccess: (data) => {
       setChannelList(formatChannelData(data.data));
@@ -67,7 +68,11 @@ const useTop = () => {
   /**
    * 追加取得
    */
-  const { api: nextFetchApi, isLoading: isNextFetchLoading } = useApi({
+  const {
+    api: nextFetchApi,
+    isLoading: isNextFetchLoading,
+    abortFetch: abortNextFetch,
+  } = useApi({
     onSuccess: (data) => {
       setChannelList((prevState) => [
         ...prevState,
@@ -108,12 +113,22 @@ const useTop = () => {
       isLive: isLive,
     };
     fetchChannels();
+
+    return () => {
+      abortInitialFetch();
+    };
   }, [channelName, isLive]);
 
   useEffect(() => {
     if (!isIntersecting) return;
     fetchNextChannels();
   }, [isIntersecting]);
+
+  useEffect(() => {
+    return () => {
+      abortNextFetch();
+    };
+  }, []);
 
   return {
     isChannelNameRequired,

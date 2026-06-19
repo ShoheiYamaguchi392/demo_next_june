@@ -22,7 +22,12 @@ const useChannelDetail = () => {
     loginName: "",
   });
 
-  const { api: fetchChannelInfoApi, isLoading } = useApi({
+  const {
+    api: fetchChannelInfoApi,
+    isLoading,
+    isError,
+    abortFetch,
+  } = useApi({
     onSuccess: (data) => {
       setChannelInfo(formatChannelInfoDeta(data.data));
     },
@@ -36,11 +41,16 @@ const useChannelDetail = () => {
 
   useEffect(() => {
     fetchChannelInfo();
+
+    return () => {
+      abortFetch();
+    };
   }, [channelId]);
 
   return {
     channelInfo,
     isLoading,
+    isError,
   };
 };
 
