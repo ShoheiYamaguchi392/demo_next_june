@@ -1,4 +1,10 @@
-export const getSearchParamString = (searchParamsObject = {}) => {
+type SearchParamObject = {
+  [K: string]: string;
+};
+
+export const getSearchParamString = (
+  searchParamsObject: SearchParamObject = {},
+) => {
   const searchParams = new URLSearchParams();
 
   for (const key of Object.keys(searchParamsObject)) {
