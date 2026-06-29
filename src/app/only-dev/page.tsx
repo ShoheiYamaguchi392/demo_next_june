@@ -11,7 +11,7 @@ const Redirect = () => {
 const DevOnly = () => {
   const fetchTwitchToken = async () => {
     const res = await fetch(
-      "https://id.twitch.tv/oauth2/token?client_id=wfjikbsiecxun2u1kgu1w1jsjkylws&client_secret=4dsk7yw7918snpbj9iy4wq87mwcc81&grant_type=client_credentials",
+      `https://id.twitch.tv/oauth2/token?client_id=${process.env.NEXT_PUBLIC_TWITCH_CLIENT_ID}&client_secret=${process.env.NEXT_PUBLIC_CLIENT_SECRET}&grant_type=client_credentials`,
       {
         method: "POST",
       },
