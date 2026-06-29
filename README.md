@@ -1,4 +1,8 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+Netlifyで公開しているページ：https://shoheinextjsdemo.netlify.app/?channelName=%25E3%2581%2582
+
+TwitchAPIのトークン切れで一覧取得できない場合があります。
+
+
 
 ## Getting Started
 
