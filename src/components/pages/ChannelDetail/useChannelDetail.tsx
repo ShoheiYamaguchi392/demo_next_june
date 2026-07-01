@@ -9,6 +9,11 @@ type ResponseData = {
   }[];
 };
 
+type ChannelInfo = {
+  channelName: string;
+  loginName: string;
+};
+
 const formatChannelInfoData = ({ data }: ResponseData) => {
   return {
     channelName: data[0]?.broadcaster_name,
@@ -16,15 +21,11 @@ const formatChannelInfoData = ({ data }: ResponseData) => {
   };
 };
 
-type channelInfo = {
-  channelName: string;
-  loginName: string;
-};
-
 const useChannelDetail = () => {
   const params = useParams();
   const channelId = params?.channelId;
-  const [channelInfo, setChannelInfo] = useState<channelInfo>({
+
+  const [channelInfo, setChannelInfo] = useState<ChannelInfo>({
     channelName: "",
     loginName: "",
   });
