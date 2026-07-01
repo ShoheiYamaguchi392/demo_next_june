@@ -7,7 +7,7 @@ import { getTwitchChannelPage } from "@/utils/getTwitchUrl";
 
 import styles from "./ChannelDetail.module.scss";
 
-const ChannelDetail = () => {
+const ChannelDetail = (): React.ReactNode => {
   const { channelInfo, isLoading, isError } = useChannelDetail();
   const channelPageUrl = getTwitchChannelPage(channelInfo.loginName);
 

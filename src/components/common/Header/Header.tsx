@@ -7,8 +7,16 @@ import { Search } from "@mui/icons-material";
 
 import useHeader from "./useHeader";
 import styles from "./Header.module.scss";
+import { FetchChannels } from "@/components/pages/Top/useTop";
 
-const Header = ({ className, fetchChannels }) => {
+import { ChangeEventHandler, KeyboardEventHandler } from "react";
+
+type HeaderProps = {
+  className: string;
+  fetchChannels?: FetchChannels | undefined;
+};
+
+const Header = ({ className, fetchChannels }: HeaderProps): React.ReactNode => {
   const {
     channelName,
     isLive,
@@ -17,16 +25,20 @@ const Header = ({ className, fetchChannels }) => {
     searchChannel,
   } = useHeader({ fetchChannels });
 
-  const handleChannelNameChange = (e) => {
-    changeChannelName(e.target.value);
+  const handleChannelNameChange: ChangeEventHandler<HTMLInputElement> = (
+    event,
+  ) => {
+    changeChannelName(event.target.value);
   };
 
-  const handleChangeIsLive = () => {
+  const handleChangeIsLive = (): void => {
     changeIsLive(!isLive);
   };
 
-  const handleInputKeydown = (e) => {
-    if (!e.nativeEvent.isComposing && e.key === "Enter") {
+  const handleInputKeydown: KeyboardEventHandler<HTMLInputElement> = (
+    event,
+  ): void => {
+    if (!event.nativeEvent.isComposing && event.key === "Enter") {
       searchChannel();
     }
   };

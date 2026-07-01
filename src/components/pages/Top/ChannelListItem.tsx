@@ -4,7 +4,16 @@ import Link from "next/link";
 
 import { useInfiniteScrollItem } from "@/hooks/useInfiniteScrollItem";
 
-const ChannelListItem = ({ ref, channel }) => {
+type Props = {
+  ref: React.Ref<HTMLDivElement>;
+  channel: {
+    displayName: string;
+    thumbnailUrl: string;
+    id: string;
+  };
+};
+
+const ChannelListItem = ({ ref, channel }: Props) => {
   const { displayName, thumbnailUrl, id: channelId } = channel;
 
   const { itemRef, itemMinHeight, isItemOffScreen } = useInfiniteScrollItem();

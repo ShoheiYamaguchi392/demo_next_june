@@ -1,4 +1,4 @@
-import axios from "axios";
+import axios, { AxiosError, AxiosResponse } from "axios";
 import { useCallback, useState, useMemo, useRef } from "react";
 
 const axiosInstance = axios.create({
@@ -11,7 +11,15 @@ const axiosInstance = axios.create({
   },
 });
 
-export const useApi = ({ onSuccess }) => {
+type Argument<T> = {
+  onSuccess: (data: T) => void;
+};
+
+type DefaultConfig = {
+  signal: AbortSignal;
+};
+
+export const useApi = <T>({ onSuccess }: Argument<T>) => {
   const [isSuccess, setIsSuccess] = useState(false);
   const [isError, setIsError] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
@@ -28,12 +36,14 @@ export const useApi = ({ onSuccess }) => {
   }, []);
 
   const callApi = useCallback(
-    async (callback) => {
+    async (
+      callback: (defaultConfig: DefaultConfig) => Promise<AxiosResponse>,
+    ) => {
       setIsLoading(true);
       reset();
 
-      const defaultConfig = {
-        signal: abortControllerRef.current?.signal,
+      const defaultConfig: DefaultConfig = {
+        signal: abortControllerRef.current!.signal,
       };
 
       try {
@@ -43,7 +53,7 @@ export const useApi = ({ onSuccess }) => {
         if (onSuccess) onSuccess(response.data);
       } catch (error) {
         // abortControllerでキャンセルされた場合はリセットする
-        if (error.code === "ERR_CANCELED") {
+        if ((error as AxiosError).code === "ERR_CANCELED") {
           reset();
         } else {
           setIsError(true);
@@ -64,18 +74,18 @@ export const useApi = ({ onSuccess }) => {
 
   const api = useMemo(() => {
     return {
-      get: (path, params?, config = {}) =>
+      get: (path: string, params?: { [K: string]: unknown }, config = {}) =>
         callApi(
-          async (defaultConfig) =>
+          async (defaultConfig: DefaultConfig) =>
             await axiosInstance.get(path, {
               params,
               ...defaultConfig,
               ...config,
             }),
         ),
-      post: (path, data?, config = {}) =>
+      post: (path: string, data = {}, config = {}) =>
         callApi(
-          async (defaultConfig) =>
+          async (defaultConfig: DefaultConfig) =>
             await axiosInstance.get(path, {
               data,
               ...defaultConfig,
