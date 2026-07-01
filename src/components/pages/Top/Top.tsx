@@ -8,7 +8,7 @@ import useTop from "./useTop";
 import styles from "./Top.module.scss";
 import ChannelListItem from "./ChannelListItem";
 
-const Top = () => {
+const Top = (): React.ReactNode => {
   const {
     isChannelNameRequired,
     channelList,

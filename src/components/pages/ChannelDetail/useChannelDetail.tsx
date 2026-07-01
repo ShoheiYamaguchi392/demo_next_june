@@ -2,7 +2,14 @@ import { useState, useEffect } from "react";
 import { useParams } from "next/navigation";
 import { useApi } from "@/hooks/useApi";
 
-const formatChannelInfoDeta = (data) => {
+type ResponseData = {
+  data: {
+    broadcaster_name: string;
+    broadcaster_login: string;
+  }[];
+};
+
+const formatChannelInfoData = ({ data }: ResponseData) => {
   return {
     channelName: data[0]?.broadcaster_name,
     loginName: data[0]?.broadcaster_login,
@@ -27,9 +34,9 @@ const useChannelDetail = () => {
     isLoading,
     isError,
     abortFetch,
-  } = useApi({
+  } = useApi<ResponseData>({
     onSuccess: (data) => {
-      setChannelInfo(formatChannelInfoDeta(data.data));
+      setChannelInfo(formatChannelInfoData(data));
     },
   });
 

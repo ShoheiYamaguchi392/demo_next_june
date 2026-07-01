@@ -1,5 +1,7 @@
 import Top from "@/components/pages/Top/Top";
 
-export default function Home() {
+const Home = (): React.ReactNode => {
   return <Top />;
-}
+};
+
+export default Home;
