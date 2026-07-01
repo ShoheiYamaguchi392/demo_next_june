@@ -5,15 +5,27 @@ import { useInfiniteScroll } from "@/hooks/useInfiniteScroll";
 import useGetChannelSearchParams from "@/hooks/useGetChannelSearchParams";
 import { usePathname } from "next/navigation";
 
-type channelList = {
+type ChannelList = {
   id: string;
   displayName: string;
   thumbnailUrl: string;
 }[];
 
+type ResponseDataKeys = "id" | "display_name" | "thumbnail_url";
+type ResponseData = {
+  data: {
+    [K in ResponseDataKeys]: string;
+  }[];
+  pagination: {
+    cursor: string;
+  };
+};
+
+export type FetchChannels = () => Promise<void>;
+
 const MaxFetchLength = 20;
 
-const formatChannelData = (channelList) => {
+const formatChannelData = (channelList: ResponseData["data"]) => {
   return channelList.map(({ id, display_name, thumbnail_url }) => {
     return {
       id,
@@ -25,8 +37,8 @@ const formatChannelData = (channelList) => {
 
 const useTop = () => {
   const { channelName, isLive } = useGetChannelSearchParams();
-  const [channelList, setChannelList] = useState<channelList>([]);
-  const [paginationCursor, setPaginationCursor] = useState(undefined);
+  const [channelList, setChannelList] = useState<ChannelList>([]);
+  const [paginationCursor, setPaginationCursor] = useState<string>("");
   const searchConditionRef = useRef({
     channelName: "",
     isLive: false,
@@ -51,17 +63,17 @@ const useTop = () => {
     isSuccess: isInitialFetchSuccess,
     isLoading: isFetchLoading,
     abortFetch: abortInitialFetch,
-  } = useApi({
+  } = useApi<ResponseData>({
     onSuccess: (data) => {
       setChannelList(formatChannelData(data.data));
-      setPaginationCursor(data?.pagination?.cursor); // 次の取得開始位置を示す
+      setPaginationCursor(data.pagination?.cursor); // 次の取得開始位置を示す
     },
   });
 
   /**
-   * 初回取得
+   * 初回取得g
    */
-  const fetchChannels = async () => {
+  const fetchChannels: FetchChannels = async () => {
     initialFetchApi.get("search/channels", apiCommonQuery);
   };
 
@@ -72,7 +84,7 @@ const useTop = () => {
     api: nextFetchApi,
     isLoading: isNextFetchLoading,
     abortFetch: abortNextFetch,
-  } = useApi({
+  } = useApi<ResponseData>({
     onSuccess: (data) => {
       setChannelList((prevState) => [
         ...prevState,

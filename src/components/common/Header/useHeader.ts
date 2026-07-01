@@ -4,8 +4,13 @@ import { useRouter } from "next/navigation";
 import useGetChannelSearchParams from "@/hooks/useGetChannelSearchParams";
 
 import { getTopPageUri } from "@/utils/getRelativeURI";
+import { FetchChannels } from "@/components/pages/Top/useTop";
 
-const useHeader = ({ fetchChannels }) => {
+type Params = {
+  fetchChannels?: FetchChannels;
+};
+
+const useHeader = ({ fetchChannels }: Params) => {
   const { channelName: initialChannelName, isLive: initialIsLive } =
     useGetChannelSearchParams();
 

@@ -1,6 +1,6 @@
 "use client";
 
-const Error = () => {
+const Error = (): React.ReactNode => {
   return null;
 };
 
