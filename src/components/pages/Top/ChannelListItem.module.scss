@@ -37,7 +37,6 @@
 
   @media (hover: hover) {
     &:hover {
-      transform: translateY(-1px);
       background-color: $hoverCardBackgroundColor;
     }
   }
