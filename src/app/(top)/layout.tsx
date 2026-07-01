@@ -1,6 +1,6 @@
 type Props = {
-  children: React.ReactElement;
-  modal: React.ReactElement;
+  children: React.ReactNode;
+  modal: React.ReactNode;
 };
 
 const Layout = ({ children, modal }: Props): React.ReactNode => {
