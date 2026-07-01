@@ -25,8 +25,9 @@ const Header = ({ className, fetchChannels }: HeaderProps): React.ReactNode => {
     searchChannel,
   } = useHeader({ fetchChannels });
 
-  const handleChannelNameChange: ChangeEventHandler = (event) => {
-    if (!(event.target instanceof HTMLTextAreaElement)) return;
+  const handleChannelNameChange: ChangeEventHandler<HTMLInputElement> = (
+    event,
+  ) => {
     changeChannelName(event.target.value);
   };
 
@@ -34,8 +35,8 @@ const Header = ({ className, fetchChannels }: HeaderProps): React.ReactNode => {
     changeIsLive(!isLive);
   };
 
-  const handleInputKeydown: KeyboardEventHandler = (
-    event: React.KeyboardEvent<HTMLTextAreaElement>,
+  const handleInputKeydown: KeyboardEventHandler<HTMLInputElement> = (
+    event,
   ): void => {
     if (!event.nativeEvent.isComposing && event.key === "Enter") {
       searchChannel();
